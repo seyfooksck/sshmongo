@@ -1,3 +1,4 @@
+
  # sshmongo
 
  **Açıklama:** Bu paket, uzak bir sunucuya SSH tüneli açıp tünel üzerinden `mongoose` ile MongoDB'ye bağlanmanızı sağlar. `tunnel-ssh` kullanarak uzak makinedeki MongoDB portunu yerel bir porta yönlendirir ve `mongoose` ile o porta bağlanır.

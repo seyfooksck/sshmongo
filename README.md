@@ -1,77 +1,4 @@
- # sshmongo
 
- **Açıklama:** Bu paket, uzak bir sunucuya SSH tüneli açıp tünel üzerinden `mongoose` ile MongoDB'ye bağlanmanızı sağlar. `tunnel-ssh` kullanarak uzak makinedeki MongoDB portunu yerel bir porta yönlendirir ve `mongoose` ile o porta bağlanır.
-
- **Hedef:** Uzak sunucudaki MongoDB'yi doğrudan açmadan, SSH ile güvenli bir tünel üzerinden kullanmak isteyen projeler için hızlı bir yardımcıdır.
-
-**İçindekiler**
-- Kurulum
-- Hızlı Başlangıç (örnek)
-- API Referansı
-- Kullanım Örnekleri (Inline test / Ortam değişkeni)
-- Kapanış ve Temizlik
-- Güvenlik ve İpuçları
-- Hata Giderme (Troubleshooting)
-
-## Kurulum
-
-Projeyi indirdikten sonra proje dizininde bağımlılıkları yükleyin:
-
-```bash
-cd /d f:\Module\sshmongo
-npm install
-```
-
-> Not: Paket `tunnel-ssh`, `get-port` ve `mongoose` bağımlılıklarını kullanır.
-
-## Hızlı Başlangıç
-
-1. `examples/example.js` dosyasını test amaçlı düzenleyin (veya kendi kodunuzda `connect` fonksiyonunu kullanın).
-2. SSH erişiminizin ve uzak MongoDB'nin (genellikle `127.0.0.1:27017`) erişilebilir olduğundan emin olun.
-3. Örneği çalıştırın:
-
-```bash
-node examples/example.js
-```
-
-Program başarılıysa konsolda tünel portu, mongoose URI ve örnek kayıt çıktıları görünecektir.
-
-## API Referansı
-
-- `const { connect } = require('./index.js')`
-- `await connect(options)` — SSH tüneli oluşturur, `mongoose` ile bağlanır ve bir obje döndürür.
-
-connect(options) parametreleri (kısa):
-
-- `options.ssh`: SSH bağlantı bilgileri. Örnek:
-
-	```js
-	{
-		host: 'ssh.example.com',
-		port: 22,
-		username: 'root',
-		// authentication: either password or privateKey / privateKeyPath
-		password: 'mypassword',
-		// or
-		privateKeyPath: '/home/user/.ssh/id_rsa'
-	}
-	```
-
-- `options.mongo`: Mongo hedef bilgileri (uzak taraf). Örnek:
-
-	```js
-	{ host: '127.0.0.1', port: 27017, dbName: 'mydb', localPort: 27000 /* optional */ }
-	```
-
-- `options.mongooseOptions`: (opsiyonel) `mongoose.connect`'e geçilecek ek seçenekler.
-
-connect döndürdüğü obje:
-
-- `{ mongoose, connection, uri, localPort, server, sshConnection, close }`
-
-- `close()` çağrıldığında `mongoose` bağlantısı sonlandırılır ve SSH tüneli kapatılır.
-
-## Kullanım Örnekleri
  # sshmongo
 
 Description
@@ -97,7 +24,7 @@ Installation
 Install dependencies from the project root:
 
 ```cmd
-cd /d f:\Module\sshmongo
+cd /d f:\Module\mongo-ssh
 npm install
 ```
 
@@ -256,3 +183,4 @@ License
 -------
 
 MIT
+  // Optionally close backup tunnels to save resources:
