@@ -1,0 +1,40 @@
+name: Auto Publish to npm
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  publish-package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Detect and run build script if exists
+        run: |
+          if npm run | grep -q "build"; then
+            echo "Build script detected. Building..."
+            npm run build
+          else
+            echo "No build script found. Skipping build."
+          fi
+
+      - name: Publish to npm
+        run: |
+          npm publish --access public --provenance
