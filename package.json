@@ -1,6 +1,6 @@
 {
   "name": "sshmongo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Mongoose-like MongoDB connector over an SSH tunnel",
   "repository": {
     "type": "git",
@@ -32,3 +32,4 @@
     "node": ">=14"
   }
 }
+
